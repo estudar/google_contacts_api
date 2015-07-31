@@ -252,7 +252,8 @@ describe "GoogleContactsApi" do
           { href: 'no-rel.example.com' }
         ],
         organizations: [
-          { org_name: 'Example, Inc', org_title: 'Manager', rel: 'other', primary: true }
+          # Allow us to not specify the rel (it defaults to 'other')
+          { org_name: 'Example, Inc', org_title: 'Manager', primary: true }
         ],
         group_memberships: [],
         deleted_group_memberships: []
@@ -1094,7 +1095,7 @@ describe "GoogleContactsApi" do
   end
 
   describe GoogleContactsApi::Group do
-    before(:all) do
+    before do
       @group_json_hash = group_json_hash
       @group = GoogleContactsApi::Group.new(group_json_hash)
     end
@@ -1164,18 +1165,18 @@ describe "GoogleContactsApi" do
   # specifies an optional yomi field for orgName, givenName, additionalName and familyName
   it 'handles Japanese yomigana "yomi" name values', focus: true do
     contact_params = {
-        'gd$name' => {
-            'gd$givenName' => {'$t' => 'John' },
-            'gd$additionalName' => {'$t' => 'Text name', 'yomi' => 'And yomi chars' },
-            'gd$familyName' => { 'yomi' => 'Yomi chars only' },
-        },
-        'gd$organization' => [{
-                                  'rel' => 'http://schemas.google.com/g/2005#other',
-                                  'primary' => 'true',
-                                  'gd$orgName' => {
-                                      'yomi' => 'Japanese yomigana'
-                                  }
-                              }],
+      'gd$name' => {
+        'gd$givenName' => {'$t' => 'John' },
+        'gd$additionalName' => {'$t' => 'Text name', 'yomi' => 'And yomi chars' },
+        'gd$familyName' => { 'yomi' => 'Yomi chars only' },
+      },
+      'gd$organization' => [{
+        'rel' => 'http://schemas.google.com/g/2005#other',
+        'primary' => 'true',
+        'gd$orgName' => {
+          'yomi' => 'Japanese yomigana'
+        }
+      }],
     }
     contact = GoogleContactsApi::Contact.new(contact_params, nil, @api)
     expect(contact.given_name).to eq('John')

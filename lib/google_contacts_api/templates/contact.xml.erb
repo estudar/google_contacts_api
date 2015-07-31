@@ -52,7 +52,7 @@
     <% end %>
 
     <% (contact[:organizations] || []).each do |org| %>
-       <gd:organization <%= org[:rel] ? "rel=\"http://schemas.google.com/g/2005##{ org[:rel] }\"" : '' %>
+       <gd:organization <%= "rel=\"http://schemas.google.com/g/2005##{ org[:rel] || 'other' }\"" %>
                 <%= org[:primary] ? 'primary="true"' : '' %>>
           <gd:orgName><%= encode(org[:org_name], :text) %></gd:orgName>
           <gd:orgTitle><%= encode(org[:org_title], :text) %></gd:orgTitle>
