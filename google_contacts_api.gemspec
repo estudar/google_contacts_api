@@ -76,7 +76,6 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
       s.add_development_dependency(%q<jeweler>.freeze, [">= 0"])
       s.add_development_dependency(%q<travis-lint>.freeze, [">= 0"])
-      s.add_runtime_dependency(%q<nokogiri>.freeze, [">= 0"])
     else
       s.add_dependency(%q<activesupport>.freeze, [">= 0"])
       s.add_dependency(%q<i18n>.freeze, [">= 0"])
@@ -93,7 +92,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<bundler>.freeze, [">= 0"])
       s.add_dependency(%q<jeweler>.freeze, [">= 0"])
       s.add_dependency(%q<travis-lint>.freeze, [">= 0"])
-      s.add_dependency(%q<nokogiri>.freeze, [">= 0"])
     end
   else
     s.add_dependency(%q<activesupport>.freeze, [">= 0"])
@@ -111,7 +109,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>.freeze, [">= 0"])
     s.add_dependency(%q<jeweler>.freeze, [">= 0"])
     s.add_dependency(%q<travis-lint>.freeze, [">= 0"])
-    s.add_dependency(%q<nokogiri>.freeze, [">= 0"])
   end
 end
 
