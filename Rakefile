@@ -19,6 +19,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Lets you read from the Google Contacts API. Posting to come later.}
   gem.email = "ayliang@gmail.com"
   gem.authors = ["Alvin Liang"]
+  gem.add_dependency 'nokogiri'
 end
 Jeweler::RubygemsDotOrgTasks.new
 
