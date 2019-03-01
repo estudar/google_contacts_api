@@ -323,7 +323,11 @@ module GoogleContactsApi
 
     def self.parse_response(response)
       raise_if_failed_response(response)
-      entry = Hashie::Mash.new(JSON.parse(response.body)).entry
+      entry = if response.body.include?('<?xml')
+                Hashie::Mash.new(Hash.from_xml(response.body)).entry
+              else
+                Hashie::Mash.new(JSON.parse(response.body)).entry
+              end
       entry.is_a?(Array) ? entry[0] : entry
     end
 
