@@ -1,3 +1,4 @@
+require 'nokogiri'
 module GoogleContactsApi
   # Represents a single contact.
   class Contact < GoogleContactsApi::Result
@@ -323,8 +324,12 @@ module GoogleContactsApi
 
     def self.parse_response(response)
       raise_if_failed_response(response)
-      entry = Hashie::Mash.new(JSON.parse(response.body)).entry
-      entry.is_a?(Array) ? entry[0] : entry
+      if response.body.include?('<?xml')
+        Nokogiri::XML(response.body)
+      else
+        entry = Hashie::Mash.new(JSON.parse(response.body)).entry
+        entry.is_a?(Array) ? entry[0] : entry
+      end
     end
 
     def self.raise_if_failed_response(response)
